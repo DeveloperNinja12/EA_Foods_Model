@@ -335,3 +335,96 @@ MIT License - see LICENSE file for details.
 This is a take-home assignment project. For production use, please follow standard contribution guidelines.
 
 ---
+
+## 🎨 Frontend Application
+
+A React frontend application is included to demonstrate the API functionality:
+
+### Frontend Features
+- **Product Browsing**: View all available products with search and category filtering
+- **User Authentication**: Simple role-based authentication (Customer, TSU, SR, Ops Manager)
+- **Shopping Cart**: Add products to cart and manage quantities
+- **Order Management**: Place orders and view order history
+- **Responsive Design**: Works on desktop and mobile devices
+
+### Frontend Technologies
+- React 18
+- React Router DOM
+- Axios (HTTP client)
+- Context API (state management)
+
+## 🚀 Quick Start
+
+### Option 1: Start Everything at Once
+```bash
+# Make the startup script executable and run it
+chmod +x start-dev.sh
+./start-dev.sh
+```
+
+This will:
+- Install all dependencies (backend and frontend)
+- Seed the database with sample data
+- Start the backend API on port 3000
+- Start the frontend React app on port 3001
+
+### Option 2: Manual Setup
+
+#### Backend Setup
+```bash
+# Install dependencies
+npm install
+
+# Seed the database
+npm run seed
+
+# Start the development server
+npm run dev
+```
+
+#### Frontend Setup
+```bash
+# Navigate to frontend directory
+cd frontend
+
+# Install dependencies
+npm install
+
+# Start the frontend development server
+PORT=3001 npm start
+```
+
+## 🌐 Access Points
+
+After starting both servers:
+
+- **Frontend Application**: http://localhost:3001
+- **Backend API**: http://localhost:3000
+- **API Documentation**: http://localhost:3000/api
+- **Health Check**: http://localhost:3000/health
+
+## 🧪 Testing the Application
+
+### Using the Frontend
+1. Open http://localhost:3001 in your browser
+2. Click "Login" and enter:
+   - Name: Your name
+   - Email: your@email.com
+   - Role: Choose from Customer, TSU, SR, or Ops Manager
+3. Browse products, add to cart, and place orders
+4. View your order history
+
+### Using the API Directly
+The API uses header-based authentication for demo purposes:
+```bash
+# Example API call with authentication headers
+curl -H "x-user-id: 1" -H "x-user-role: customer" \
+     http://localhost:3000/api/products
+```
+
+### Available User Roles
+- **customer**: Can browse products and place orders
+- **tsu**: Territory Sales Unit - can place orders
+- **sr**: Sales Representative - can place orders
+- **ops_manager**: Full administrative access
+
