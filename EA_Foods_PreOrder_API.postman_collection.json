@@ -1,0 +1,1150 @@
+{
+  "info": {
+    "name": "EA Foods Pre-Order API",
+    "description": "Complete API collection for EA Foods Pre-Order System - 24-hour take-home assignment",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "noauth"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "customerUserId",
+      "value": "2",
+      "type": "string"
+    },
+    {
+      "key": "opsManagerUserId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "tsuUserId",
+      "value": "4",
+      "type": "string"
+    },
+    {
+      "key": "srUserId",
+      "value": "6",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            },
+            "description": "Check if the API is running and healthy"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "API Documentation",
+      "item": [
+        {
+          "name": "Get API Documentation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api",
+              "host": ["{{baseUrl}}"],
+              "path": ["api"]
+            },
+            "description": "Get API documentation and available endpoints"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Create User (Admin Only)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newuser@example.com\",\n  \"name\": \"New User\",\n  \"role\": \"customer\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"]
+            },
+            "description": "Create a new user (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Users (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users?limit=50&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Get all users with pagination (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by ID (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/2",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "2"]
+            },
+            "description": "Get user by ID (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Users by Role (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/role/customer",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "role", "customer"]
+            },
+            "description": "Get users by role (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update User (Admin Only)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated User Name\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/2",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "2"]
+            },
+            "description": "Update user information (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Statistics (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/statistics",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "statistics"]
+            },
+            "description": "Get user statistics (admin only)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products?limit=50&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Get all products with pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "1"]
+            },
+            "description": "Get product by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Products by Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products/category/Fruits",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "category", "Fruits"]
+            },
+            "description": "Get products by category"
+          },
+          "response": []
+        },
+        {
+          "name": "Search Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products/search?q=apple",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "apple"
+                }
+              ]
+            },
+            "description": "Search products by name or description"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products/categories",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "categories"]
+            },
+            "description": "Get all product categories"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Product (Admin Only)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Organic Avocado\",\n  \"description\": \"Fresh organic avocado, perfect for salads and smoothies\",\n  \"price\": 3.99,\n  \"category\": \"Fruits\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products"]
+            },
+            "description": "Create a new product (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Product (Admin Only)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 4.49\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/products/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "1"]
+            },
+            "description": "Update product information (admin only)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Get Available Delivery Slots",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/delivery-slots",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders", "delivery-slots"]
+            },
+            "description": "Get available delivery slots"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Order (Customer)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "customer"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{customerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"delivery_slot\": \"morning\",\n  \"items\": [\n    {\n      \"product_id\": 1,\n      \"quantity\": 2\n    },\n    {\n      \"product_id\": 3,\n      \"quantity\": 1\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders"]
+            },
+            "description": "Create a new order (customers, TSUs, SRs)"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Order (TSU)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "tsu"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{tsuUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"delivery_slot\": \"afternoon\",\n  \"items\": [\n    {\n      \"product_id\": 2,\n      \"quantity\": 3\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders"]
+            },
+            "description": "Create a new order as TSU"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Order (SR)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "sr"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{srUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"delivery_slot\": \"evening\",\n  \"items\": [\n    {\n      \"product_id\": 8,\n      \"quantity\": 1\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders"]
+            },
+            "description": "Create a new order as SR"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Order by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "customer"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{customerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders", "1"]
+            },
+            "description": "Get order by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Orders by User ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "customer"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{customerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/user/{{customerUserId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders", "user", "{{customerUserId}}"]
+            },
+            "description": "Get orders by user ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Orders (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders?limit=50&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Get all orders (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Orders by Status (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/status/pending",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders", "status", "pending"]
+            },
+            "description": "Get orders by status (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Order Status (Admin Only)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"confirmed\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/1/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders", "1", "status"]
+            },
+            "description": "Update order status (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Order",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "customer"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{customerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/1/cancel",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders", "1", "cancel"]
+            },
+            "description": "Cancel an order (restores stock)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Order Statistics (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/statistics",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders", "statistics"]
+            },
+            "description": "Get order statistics (admin only)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Stock Management",
+      "item": [
+        {
+          "name": "Get All Stock (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stock?limit=50&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stock"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Get all stock with product details (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Stock by Product ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "customer"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{customerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stock/product/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stock", "product", "1"]
+            },
+            "description": "Get stock for a specific product"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Stock (Admin Only)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": 1,\n  \"quantity\": 100\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/stock/update",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stock", "update"]
+            },
+            "description": "Update stock for a product (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Bulk Update Stock (Admin Only)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stock_updates\": [\n    {\n      \"product_id\": 1,\n      \"quantity\": 50\n    },\n    {\n      \"product_id\": 2,\n      \"quantity\": 75\n    },\n    {\n      \"product_id\": 3,\n      \"quantity\": 30\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/stock/bulk-update",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stock", "bulk-update"]
+            },
+            "description": "Bulk update stock for multiple products (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Initialize Stock (Admin Only)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": 11,\n  \"initial_quantity\": 25\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/stock/initialize",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stock", "initialize"]
+            },
+            "description": "Initialize stock for a new product (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Check Stock Availability",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "customer"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{customerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"product_id\": 1,\n      \"quantity\": 5\n    },\n    {\n      \"product_id\": 9,\n      \"quantity\": 2\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/stock/check-availability",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stock", "check-availability"]
+            },
+            "description": "Check stock availability for order items"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Low Stock Products (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stock/low-stock?threshold=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stock", "low-stock"],
+              "query": [
+                {
+                  "key": "threshold",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get products with low stock (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Stock History (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stock/product/1/history",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stock", "product", "1", "history"]
+            },
+            "description": "Get stock update history for a product (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Stock Statistics (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stock/statistics",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stock", "statistics"]
+            },
+            "description": "Get stock statistics (admin only)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Business Logic Scenarios",
+      "item": [
+        {
+          "name": "Scenario 1: Order within stock (SUCCESS)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "customer"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{customerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"delivery_slot\": \"morning\",\n  \"items\": [\n    {\n      \"product_id\": 1,\n      \"quantity\": 2\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders"]
+            },
+            "description": "Place order for 2 apples (within stock) - should succeed"
+          },
+          "response": []
+        },
+        {
+          "name": "Scenario 2: Order exceeding stock (REJECTED)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "customer"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{customerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"delivery_slot\": \"afternoon\",\n  \"items\": [\n    {\n      \"product_id\": 9,\n      \"quantity\": 15\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders"]
+            },
+            "description": "Attempt to order 15 salmon (exceeds stock of 10) - should be rejected"
+          },
+          "response": []
+        },
+        {
+          "name": "Scenario 3: Create order to cancel",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "customer"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{customerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"delivery_slot\": \"evening\",\n  \"items\": [\n    {\n      \"product_id\": 2,\n      \"quantity\": 3\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders"]
+            },
+            "description": "Create order for 3 bananas to test cancellation"
+          },
+          "response": []
+        },
+        {
+          "name": "Scenario 4: Cancel order (restores stock)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "customer"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{customerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{orderId}}/cancel",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders", "{{orderId}}", "cancel"]
+            },
+            "description": "Cancel the order created above (replace {{orderId}} with actual ID)"
+          },
+          "response": []
+        },
+        {
+          "name": "Scenario 5: Update stock (ops manager)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "ops_manager"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{opsManagerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": 3,\n  \"quantity\": 100\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/stock/update",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stock", "update"]
+            },
+            "description": "Ops manager updates spinach stock to 100 units"
+          },
+          "response": []
+        },
+        {
+          "name": "Scenario 6: Order after stock update",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-role",
+                "value": "customer"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{customerUserId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"delivery_slot\": \"morning\",\n  \"items\": [\n    {\n      \"product_id\": 3,\n      \"quantity\": 5\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "orders"]
+            },
+            "description": "Place order for 5 spinach after stock update - should succeed"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
